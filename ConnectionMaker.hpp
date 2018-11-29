@@ -3,6 +3,7 @@
 #include "Application.hpp"
 #include "Loader.hpp"
 #include "Controller.hpp"
+#include "SwitchManager.hpp"
 #include <fluid/OFClient.hh>
 
 #include <string>
@@ -16,10 +17,13 @@ class ConnectionMaker : public Application
     SIMPLE_APPLICATION(ConnectionMaker, "connection-maker")
 public:
     void init(Loader* loader, const Config& config) override;
-    void addConnection(int id, const std::string& address, int port);
+    void startUp(Loader* loader);
+    void addConnections();
 
 private:
     std::unique_ptr<fluid_base::OFClient> client_;
+    Config config_;
+    SwitchManager* switch_manager_;
 };
 
 } // namespace runos
